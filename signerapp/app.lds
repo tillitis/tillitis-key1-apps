@@ -8,7 +8,7 @@ ENTRY(_start)
 
 MEMORY
 {
-	RAM1 (rwx)   : ORIGIN = 0x40000000, LENGTH = 0x10000 /* 64 KB */
+	RAM1 (rw)   : ORIGIN = 0x40000000, LENGTH = 0x10000 /* 64 KB */
 	RAM2 (rwx)   : ORIGIN = 0x40010000, LENGTH = 0x10000 /* 64 KB */
 }
 
