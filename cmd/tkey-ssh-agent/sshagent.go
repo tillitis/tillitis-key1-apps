@@ -52,6 +52,7 @@ func (s *SSHAgent) handleConn(c net.Conn) {
 // implementing agent.ExtendedAgent below
 
 func (s *SSHAgent) List() ([]*agent.Key, error) {
+	s.signer.Connect()
 	if !s.signer.isConnected() {
 		le.Printf("List: not connected, returning empty list\n")
 		return []*agent.Key{}, nil
@@ -73,6 +74,7 @@ func (s *SSHAgent) List() ([]*agent.Key, error) {
 var ErrNotImplemented = errors.New("not implemented")
 
 func (s *SSHAgent) Sign(key ssh.PublicKey, data []byte) (*ssh.Signature, error) {
+	s.signer.Connect()
 	if !s.signer.isConnected() {
 		return nil, ErrNoDevice
 	}

@@ -1,5 +1,0 @@
-# When Tillitis TKey device is added/removed, signal tkey-ssh-agent so it can
-# reconnect.
-ACTION=="add|remove", SUBSYSTEM=="tty",\
-ATTRS{idVendor}=="1207", ATTRS{idProduct}=="8887",\
-RUN+="/usr/bin/pkill -HUP ^tkey-ssh-agent$"

@@ -73,8 +73,6 @@ func NewSigner(devPathArg string, speedArg int, enterUSS bool, fileUSS string, p
 		connected: atomic.Bool{},
 	}
 
-	handleSignals(signer.EventHandler, syscall.SIGHUP)
-
 	// Start handling signals here to catch abort during USS entering
 	handleSignals(func() {
 		signer.disconnect()
@@ -92,8 +90,8 @@ func NewSigner(devPathArg string, speedArg int, enterUSS bool, fileUSS string, p
 	return &signer
 }
 
-func (s *Signer) EventHandler() {
-	le.Printf("Reconnecting!\n")
+func (s *Signer) Connect() {
+	le.Printf("Connecting!\n")
 
 	s.disconnect()
 
