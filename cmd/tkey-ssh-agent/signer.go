@@ -55,7 +55,6 @@ type Signer struct {
 
 func NewSigner(devPathArg string, speedArg int, enterUSS bool, fileUSS string, pinentry string, exitFunc func(int)) *Signer {
 	var signer Signer
-	var err error
 
 	tk1.SilenceLogging()
 
@@ -78,14 +77,6 @@ func NewSigner(devPathArg string, speedArg int, enterUSS bool, fileUSS string, p
 		signer.disconnect()
 		exitFunc(1)
 	}, os.Interrupt, syscall.SIGTERM)
-
-	signer.connect()
-	if signer.isConnected() {
-		if err = signer.maybeLoadApp(); err != nil {
-			le.Printf("Failed to load app: %v\n", err)
-			signer.disconnect()
-		}
-	}
 
 	return &signer
 }
