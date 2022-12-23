@@ -72,6 +72,9 @@ func NewSigner(devPathArg string, speedArg int, enterUSS bool, fileUSS string, p
 		connected: atomic.Bool{},
 	}
 
+	// Do nothing on HUP, in case old udev rule is still in effect
+	handleSignals(func() {}, syscall.SIGHUP)
+
 	// Start handling signals here to catch abort during USS entering
 	handleSignals(func() {
 		signer.disconnect()
