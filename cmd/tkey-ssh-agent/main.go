@@ -165,6 +165,8 @@ green when the stick must be touched to complete a signature.`, progname)
 			le.Printf("%s\n", err)
 			exit(1)
 		}
+	} else {
+		signer.Connect()
 	}
 
 	exit(0)
